@@ -12,7 +12,13 @@ import { LoginService } from './login.service';
 export class AppComponent implements OnInit{
   message="Hello world";
   accounts:IAcounnt[]=[];
-  constructor( private LogingService:LoginService ,private accounyservice:AccountsService){}
+  constructor( private LogingService:LoginService ,private accounyservice:AccountsService){
+    this.accounyservice.useradded.subscribe(
+      (account:IAcounnt)=>
+      alert(account.name
+        +account.password)
+      )
+  }
 
 
   ngOnInit(): void {

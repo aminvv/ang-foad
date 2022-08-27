@@ -8,7 +8,7 @@ export class LoginService {
   constructor() { }
  
     logMessag(M:String){
-        console.log(M);
+        console.log("log="+M);
         
     }
 

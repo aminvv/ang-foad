@@ -20,6 +20,8 @@ export class AddAccountComponent implements OnInit {
  console.log("ss");
 
  console.log(a);
- 
+ this.accountservice.useradded.emit(a)
+
+
  }
 }
