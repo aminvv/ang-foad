@@ -2,5 +2,18 @@
 <ul>
     <li *ngFor="let item of accounts">{{item.name+"----------"+item.password}} </li>
 </ul>
+<div>
+    <ul>
+        <li *ngFor="let item of postArray">
+            {{item.id}}
+        </li>
+    </ul>
+</div>
 
+
+Title:<input type="text" #postTitle>
+Body:<input type="text" #postBody>
+Id:<input type="text" #postId>
+<button (click)="addpost()">Add Post</button>
+<button (click)="putpost()">put Post</button>
 
