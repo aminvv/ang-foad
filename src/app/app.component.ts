@@ -4,6 +4,7 @@ import { IAcounnt } from './account.iterface';
 import { AccountsService } from './accounts.service';
 import { LoginService } from './login.service';
 import { PostService } from './services/post.service';
+import { NgForm } from '@angular/forms';
 
 
 
@@ -18,9 +19,10 @@ export class AppComponent implements OnInit {
   accounts: IAcounnt[] = [];
   postArray;
 
-  @ViewChild('postTitle') postTitle!:ElementRef;
-  @ViewChild('postBody') postBody!:ElementRef;
-  @ViewChild('postId') postId!:ElementRef;
+  @ViewChild('postTitle') postTitle!: ElementRef;
+  @ViewChild('postBody') postBody!: ElementRef;
+  @ViewChild('postId') postId!: ElementRef;
+  @ViewChild('a')InputForm!:NgForm
 
 
   constructor(private LogingService: LoginService, private accounyservice: AccountsService,
@@ -42,25 +44,27 @@ export class AppComponent implements OnInit {
 
   }
 
-  addpost(){
-    let post:Ipost={userId:10,title:'',body:"",id:0};
-    post.userId=10
-    post.body=this.postBody.nativeElement.value
-    post.title=this.postTitle.nativeElement.value
+  addpost() {
+    let post: Ipost = { userId: 10, title: '', body: "", id: 0 };
+    post.userId = 10
+    post.body = this.postBody.nativeElement.value
+    post.title = this.postTitle.nativeElement.value
 
     this.postservice.postpost(post).subscribe
-    (response=>console.log(response))
+      (response => console.log(response))
   }
-  putpost(){
-    let post:Ipost={userId:10,title:'',body:"",id:0};
-    post.userId=10
-    post.body=this.postBody.nativeElement.value
-    post.title=this.postTitle.nativeElement.value
-    let id=+this.postId.nativeElement.value
+  putpost() {
+    let post: Ipost = { userId: 10, title: '', body: "", id: 0 };
+    post.userId = 10
+    post.body = this.postBody.nativeElement.value
+    post.title = this.postTitle.nativeElement.value
+    let id = +this.postId.nativeElement.value
 
-    this.postservice.putpost(post,id).subscribe(
-      (response=>console.log(response)
-      )
-    )
+    this.postservice.putpost(post, id).subscribe(
+      (response => console.log(response)))
+  }
+  OnSubmit(from:NgForm){
+    console.log(this.InputForm);
+    
   }
 }

@@ -1,4 +1,4 @@
-<app-add-account></app-add-account>
+<!-- <app-add-account></app-add-account>
 <ul>
     <li *ngFor="let item of accounts">{{item.name+"----------"+item.password}} </li>
 </ul>
@@ -15,5 +15,33 @@ Title:<input type="text" #postTitle>
 Body:<input type="text" #postBody>
 Id:<input type="text" #postId>
 <button (click)="addpost()">Add Post</button>
-<button (click)="putpost()">put Post</button>
+<button (click)="putpost()">put Post</button> -->
+<br>
+<br>
+<br>
+<br>
 
+<div class="container">
+    <form #a="ngForm" (ngSubmit)="OnSubmit(a)" >
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" id="Username" ngModel name="Username">
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" id="Email" ngModel name="Email">
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <select class="form-control" id="Gender" ngModel name="Gender">
+                <option value="Male">Male</option>
+                <option value="Female">female</option>
+            </select>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>
