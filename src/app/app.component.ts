@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
   message = "Hello world";
   accounts: IAcounnt[] = [];
   postArray;
+  defulteGender="Female";
+  color='';
 
   @ViewChild('postTitle') postTitle!: ElementRef;
   @ViewChild('postBody') postBody!: ElementRef;
