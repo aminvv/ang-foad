@@ -18,13 +18,22 @@ export class AppComponent implements OnInit {
   message = "Hello world";
   accounts: IAcounnt[] = [];
   postArray;
-  defulteGender="Female";
-  color='';
+  defulteGender = "Female";
+  color = '';
+  animals = ['dog', 'horse', 'cat', 'bee', 'elephant',];
+  User={
+    username:'',
+    email:'',
+    gender:'',
+    color:'',
+    animal:'',
+  }
+  ISsubmitted=false;
 
   @ViewChild('postTitle') postTitle!: ElementRef;
   @ViewChild('postBody') postBody!: ElementRef;
   @ViewChild('postId') postId!: ElementRef;
-  @ViewChild('a')InputForm!:NgForm
+  @ViewChild('a') InputForm!: NgForm
 
 
   constructor(private LogingService: LoginService, private accounyservice: AccountsService,
@@ -65,8 +74,31 @@ export class AppComponent implements OnInit {
     this.postservice.putpost(post, id).subscribe(
       (response => console.log(response)))
   }
-  OnSubmit(from:NgForm){
+  OnSubmit(from: NgForm) {
     console.log(this.InputForm);
-    
+    this.ISsubmitted=true
+    this.User.username=this.InputForm.value.GroupUser.Username
+    this.User.email=this.InputForm.value.GroupUser.Email
+    this.User.gender=this.InputForm.value.Gender
+    this.User.color=this.InputForm.value.color
+    this.User.animal=this.InputForm.value.animal
+    this.InputForm.reset()
+  }
+  onclick() {
+    // this.InputForm.setValue({
+    //   GroupUser: {
+    //     Username: 'amin',
+    //     Email: ''
+    //   },
+    //   Gender: '',
+    //   color: '',
+    //   animal: ''
+    // });
+
+    this.InputForm.form.patchValue({
+            GroupUser:{ 
+         Username: 'amin'
+            }
+    })
   }
 }

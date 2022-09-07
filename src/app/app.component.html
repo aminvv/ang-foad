@@ -22,32 +22,57 @@ Id:<input type="text" #postId>
 <br>
 
 <div class="container">
-    <form #a="ngForm" (ngSubmit)="OnSubmit(a)" >
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" class="form-control" id="Username" ngModel name="Username"required #username="ngModel">
-            <span class="help-block " *ngIf="!username.valid && username.touched">Enter a valid username </span>
-        </div>
+    <form #a="ngForm" (ngSubmit)="OnSubmit(a)">
+        <button class="btn btn-primary" (click)="onclick()">Change values</button>
+        <div ngModelGroup="GroupUser" #group="ngModelGroup">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" id="Username" ngModel name="Username" required
+                    #username="ngModel">
+                <span class="help-block " *ngIf="!username.valid && username.touched">Enter a valid username </span>
+            </div>
 
-        <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" id="Email" ngModel name="Email" required email >
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" id="Email" ngModel name="Email" required email>
+            </div>
         </div>
-
         <div class="form-group">
             <label>Gender</label>
-            <select class="form-control" id="Gender" [ngModel]="defulteGender" name="Gender"required>    
+            <select class="form-control" id="Gender" [ngModel]="defulteGender" name="Gender" required>
                 <option value="Male">Male</option>
                 <option value="Female">female</option>
             </select>
         </div>
         <br>
         <div class="form-group">
-        <input type="text" name="color"[(ngModel)]="color" class="form-control">
-        <span>your favorite color:{{color}}</span>
-    </div>
+            <input type="text" name="color" [(ngModel)]="color" class="form-control">
+            <span>your favorite color:{{color}}</span>
+        </div>
+        <div class="radio " *ngFor="let animal of animals">
+            <label>
+                <input type="radio" name="animal" [ngModel]="animal" value="animal">
+                {{animal}}
+            </label>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary" [disabled]="!a.valid">Submit</button>
     </form>
 
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="form-group" *ngIf="ISsubmitted">
+    <div class="form-control">
+        <p>UserName:{{User.username}}</p>
+        <p>Email:{{User.email}}</p>
+        <p>Gender:{{User.gender}}</p>
+        <p>Color:{{User.color}}</p>
+        <p>Animal:{{User.animal}}</p>
+    </div>
 </div>
