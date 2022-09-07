@@ -4,8 +4,7 @@ import { IAcounnt } from './account.iterface';
 import { AccountsService } from './accounts.service';
 import { LoginService } from './login.service';
 import { PostService } from './services/post.service';
-import { NgForm } from '@angular/forms';
-
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 
 
@@ -29,6 +28,8 @@ export class AppComponent implements OnInit {
     animal:'',
   }
   ISsubmitted=false;
+  gender=['male','female'];
+  inputForm!:FormGroup;
 
   @ViewChild('postTitle') postTitle!: ElementRef;
   @ViewChild('postBody') postBody!: ElementRef;
@@ -52,6 +53,12 @@ export class AppComponent implements OnInit {
     this.LogingService.logMessag(this.message)
     this.accounts = this.accounyservice.iacount
     this.postservice.getPost().subscribe(q => this.postArray = q)
+
+    this.inputForm= new FormGroup({
+      'Username': new FormControl(null ,Validators.required),
+      'Email':new FormControl(null,[Validators.required, Validators.email]),
+      'Gender' :new FormControl('male')
+    })
 
   }
 
@@ -100,5 +107,10 @@ export class AppComponent implements OnInit {
          Username: 'amin'
             }
     })
+  }
+
+  onsubmit(){
+    console.log(this.inputForm);
+    
   }
 }

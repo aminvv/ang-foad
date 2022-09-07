@@ -16,11 +16,10 @@ Body:<input type="text" #postBody>
 Id:<input type="text" #postId>
 <button (click)="addpost()">Add Post</button>
 <button (click)="putpost()">put Post</button> -->
-<br>
-<br>
-<br>
-<br>
-
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-6">
+<h1>Temlpate Driven</h1>
 <div class="container">
     <form #a="ngForm" (ngSubmit)="OnSubmit(a)">
         <button class="btn btn-primary" (click)="onclick()">Change values</button>
@@ -60,13 +59,12 @@ Id:<input type="text" #postId>
     </form>
 
 </div>
+</div>
 
 
-<br>
-<br>
-<br>
-<br>
 
+<div class="col-md-6">
+    <div class="card ">
 <div class="form-group" *ngIf="ISsubmitted">
     <div class="form-control">
         <p>UserName:{{User.username}}</p>
@@ -75,4 +73,37 @@ Id:<input type="text" #postId>
         <p>Color:{{User.color}}</p>
         <p>Animal:{{User.animal}}</p>
     </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<br>
+<br>
+<br>
+<div class="container-fluid">
+<div class=" col-md-6">
+<form [formGroup]="inputForm" (ngSubmit)="onsubmit()" >
+        <div class="form-group">
+            <label for="Username">Username</label>
+            <input formControlName="Username" type="text" class="form-control" id="Username" >
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input formControlName="Email" type="text" class="form-control" id="Email" >
+        </div>
+            
+        <div class="radio" *ngFor="let Gender of gender">
+            <label >
+                <input formControlName="Gender" type="radio" [value]="Gender">{{Gender}}
+            </label>
+        </div>
+
+
+    <button type="submit" class="btn btn-primary" >Submit</button>
+</form>
+</div>
 </div>
