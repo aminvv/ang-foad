@@ -4,7 +4,7 @@ import { IAcounnt } from './account.iterface';
 import { AccountsService } from './accounts.service';
 import { LoginService } from './login.service';
 import { PostService } from './services/post.service';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 
 
@@ -55,12 +55,21 @@ export class AppComponent implements OnInit {
     this.postservice.getPost().subscribe(q => this.postArray = q)
 
     this.inputForm= new FormGroup({
-      'Username': new FormControl(null ,Validators.required),
-      'Email':new FormControl(null,[Validators.required, Validators.email]),
-      'Gender' :new FormControl('male')
+      'Info' :new FormGroup({
+        'Username': new FormControl(null ,Validators.required),
+        'Email':new FormControl(null,[Validators.required, Validators.email]),
+      }),
+
+      'Gender' :new FormControl('male'),
+      'Colors':new FormArray ([])
     })
 
   }
+
+  OnAddColorClick(){
+    const controle= new FormControl(null,Validators.required);
+ return( this.inputForm.get('Colors')as FormArray).controls
+ }
 
   addpost() {
     let post: Ipost = { userId: 10, title: '', body: "", id: 0 };

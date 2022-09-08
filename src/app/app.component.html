@@ -17,66 +17,67 @@ Id:<input type="text" #postId>
 <button (click)="addpost()">Add Post</button>
 <button (click)="putpost()">put Post</button> -->
 <div class="container-fluid">
-<div class="row">
-<div class="col-md-6">
-<h1>Temlpate Driven</h1>
-<div class="container">
-    <form #a="ngForm" (ngSubmit)="OnSubmit(a)">
-        <button class="btn btn-primary" (click)="onclick()">Change values</button>
-        <div ngModelGroup="GroupUser" #group="ngModelGroup">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" id="Username" ngModel name="Username" required
-                    #username="ngModel">
-                <span class="help-block " *ngIf="!username.valid && username.touched">Enter a valid username </span>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Temlpate Driven</h1>
+            <div class="container">
+                <form #a="ngForm" (ngSubmit)="OnSubmit(a)">
+                    <button class="btn btn-primary" (click)="onclick()">Change values</button>
+                    <div ngModelGroup="GroupUser" #group="ngModelGroup">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control" id="Username" ngModel name="Username" required
+                                #username="ngModel">
+                            <span class="help-block " *ngIf="!username.valid && username.touched">Enter a valid username
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" id="Email" ngModel name="Email" required email>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select class="form-control" id="Gender" [ngModel]="defulteGender" name="Gender" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">female</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" name="color" [(ngModel)]="color" class="form-control">
+                        <span>your favorite color:{{color}}</span>
+                    </div>
+                    <div class="radio " *ngFor="let animal of animals">
+                        <label>
+                            <input type="radio" name="animal" [ngModel]="animal" value="animal">
+                            {{animal}}
+                        </label>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary" [disabled]="!a.valid">Submit</button>
+                </form>
+
             </div>
+        </div>
 
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" id="Email" ngModel name="Email" required email>
+
+
+        <div class="col-md-6">
+            <div class="card ">
+                <div class="form-group" *ngIf="ISsubmitted">
+                    <div class="form-control">
+                        <p>UserName:{{User.username}}</p>
+                        <p>Email:{{User.email}}</p>
+                        <p>Gender:{{User.gender}}</p>
+                        <p>Color:{{User.color}}</p>
+                        <p>Animal:{{User.animal}}</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label>Gender</label>
-            <select class="form-control" id="Gender" [ngModel]="defulteGender" name="Gender" required>
-                <option value="Male">Male</option>
-                <option value="Female">female</option>
-            </select>
-        </div>
-        <br>
-        <div class="form-group">
-            <input type="text" name="color" [(ngModel)]="color" class="form-control">
-            <span>your favorite color:{{color}}</span>
-        </div>
-        <div class="radio " *ngFor="let animal of animals">
-            <label>
-                <input type="radio" name="animal" [ngModel]="animal" value="animal">
-                {{animal}}
-            </label>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary" [disabled]="!a.valid">Submit</button>
-    </form>
-
-</div>
-</div>
-
-
-
-<div class="col-md-6">
-    <div class="card ">
-<div class="form-group" *ngIf="ISsubmitted">
-    <div class="form-control">
-        <p>UserName:{{User.username}}</p>
-        <p>Email:{{User.email}}</p>
-        <p>Gender:{{User.gender}}</p>
-        <p>Color:{{User.color}}</p>
-        <p>Animal:{{User.animal}}</p>
     </div>
-</div>
-</div>
-</div>
-</div>
 </div>
 
 
@@ -84,26 +85,52 @@ Id:<input type="text" #postId>
 <br>
 <br>
 <div class="container-fluid">
-<div class=" col-md-6">
-<form [formGroup]="inputForm" (ngSubmit)="onsubmit()" >
-        <div class="form-group">
-            <label for="Username">Username</label>
-            <input formControlName="Username" type="text" class="form-control" id="Username" >
-        </div>
+    <div class=" col-md-6">
+        <form [formGroup]="inputForm" (ngSubmit)="onsubmit()">
+            <div [formGroupName]="'Info'">
+                <div class="form-group">
+                    <label for="Username">Username</label>
+                    <input formControlName="Username" type="text" class="form-control" id="Username">
+                    <span class="alert alert-danger"
+                        *ngIf="!inputForm.get('Info.Username')?.valid && inputForm.get('Info.Username')?.touched">please
+                        enter a username</span>
+                </div>
 
-        <div class="form-group">
-            <label for="Email">Email</label>
-            <input formControlName="Email" type="text" class="form-control" id="Email" >
-        </div>
-            
-        <div class="radio" *ngFor="let Gender of gender">
-            <label >
-                <input formControlName="Gender" type="radio" [value]="Gender">{{Gender}}
-            </label>
-        </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input formControlName="Email" type="text" class="form-control" id="Email">
+                    <span class="alert alert-danger" *ngIf="!inputForm.valid && inputForm.touched">please enter a
+                        email</span>
 
+                </div>
+            </div>
+            <div>
+                <div class="radio" *ngFor="let Gender of gender">
+                    <label>
+                        <input formControlName="Gender" type="radio" [value]="Gender">{{Gender}}
+                    </label>
 
-    <button type="submit" class="btn btn-primary" >Submit</button>
-</form>
-</div>
+                </div>
+                <span class="alert alert-danger" *ngIf="!inputForm.valid && inputForm.touched">please enter a
+                    gender</span>
+            </div>
+            -------------------------------------------------------------------------------
+            -------------------------------------------------------------------------------
+            <div class="form-group" formArrayName="Colors">
+                <h4> inter your colors </h4>
+                <button type="button" class="btn btn-primary" (click)="OnAddColorClick()">ADD</button>
+                <div class="form-group" *ngFor="let color of inputForm.get('Colors').contorols ;let i=index">
+                    <input type="text" class="form-control" [formControlName]="i">
+
+                </div>
+            </div>
+
+            -------------------------------------------------------------------------------
+            -------------------------------------------------------------------------------
+            <br>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </div>
